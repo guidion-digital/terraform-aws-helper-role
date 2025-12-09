@@ -19,7 +19,7 @@ variable "assuming_principal" {
   description = "Principal"
 
   validation {
-    condition     = contains(["lambda.amazonaws.com", "rds.amazonaws.com"], var.principal)
+    condition     = contains(["lambda.amazonaws.com", "rds.amazonaws.com"], var.assuming_principal)
     error_message = "Pricipal supports: lambda, rds."
   }
 }
