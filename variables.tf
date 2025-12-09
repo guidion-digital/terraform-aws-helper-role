@@ -14,6 +14,12 @@ variable "app_name" {
   description = "Application name"
 }
 
+variable "attach_lambda_cloudwatch" {
+  type        = bool
+  description = "Attach Cloudwatch policy"
+  default     = false
+}
+
 variable "assuming_principal" {
   type        = string
   description = "Principal"

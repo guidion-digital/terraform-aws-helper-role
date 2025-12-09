@@ -18,10 +18,11 @@ module "roles" {
     }
   }
 
-  name                    = replace(each.key, "_", "-")
-  app_name                = "demoapp"
-  assuming_principal      = "lambda.amazonaws.com"
-  source_policy_documents = each.value.source_policy_documents
+  name                     = replace(each.key, "_", "-")
+  app_name                 = "demoapp"
+  assuming_principal       = "lambda.amazonaws.com"
+  source_policy_documents  = each.value.source_policy_documents
+  attach_lambda_cloudwatch = true
 }
 
 # Example output

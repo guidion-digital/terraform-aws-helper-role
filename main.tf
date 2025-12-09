@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "cloudwatch_policy_document" {
 
 data "aws_iam_policy_document" "policy_document" {
   source_policy_documents = concat(
-    [data.aws_iam_policy_document.cloudwatch_policy_document.json],
+    var.attach_lambda_cloudwatch ? [data.aws_iam_policy_document.cloudwatch_policy_document.json] : [],
     var.source_policy_documents
   )
 }
