@@ -11,7 +11,7 @@ variable "source_policy_documents" {
   validation {
     condition = alltrue([
       for doc in var.source_policy_documents :
-      can(jsondecode(doc).Version) && can(jsondecode(doc).Statement)
+      can(doc.Version) && can(doc.Statement)
     ])
     error_message = "Each source policy document must be a valid IAM policy JSON with Version and Statement keys."
   }
