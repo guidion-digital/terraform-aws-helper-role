@@ -6,7 +6,7 @@ locals {
         "Sid"    = "",
         "Effect" = "Allow",
         "Principal" = {
-          "Service" = var.assuming_principal ? var.assuming_principal : var.assuming_principals
+          "Service" = var.assuming_principal ? [var.assuming_principal] : var.assuming_principals
         },
         "Action" = "sts:AssumeRole"
       }
