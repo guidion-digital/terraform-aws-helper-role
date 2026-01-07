@@ -34,7 +34,7 @@ variable "assuming_principal" {
   default     = null
 
   validation {
-    condition     = var.assuming_principal == null || contains(["lambda.amazonaws.com", "rds.amazonaws.com"], var.assuming_principal)
+    condition     = var.assuming_principal == null ? true : contains(["lambda.amazonaws.com", "rds.amazonaws.com"], var.assuming_principal)
     error_message = "Pricipal supports: lambda, rds."
   }
 }
