@@ -12,8 +12,8 @@ module "roles_with_principal" {
   for_each = {
     "full_access_credentials" = {
       source_policy_documents = [
-        data.aws_iam_policy_document.onboarding_lambdas_read_credentials.json,
-        data.aws_iam_policy_document.onboarding_lambdas_write_credentials.json
+        data.aws_iam_policy_document.onboarding_lambdas_read_credentials,
+        data.aws_iam_policy_document.onboarding_lambdas_write_credentials
       ]
     }
   }
@@ -31,8 +31,8 @@ module "roles_with_principals" {
   for_each = {
     "full_access_credentials" = {
       source_policy_documents = [
-        data.aws_iam_policy_document.onboarding_lambdas_read_credentials.json,
-        data.aws_iam_policy_document.onboarding_lambdas_write_credentials.json
+        data.aws_iam_policy_document.onboarding_lambdas_read_credentials,
+        data.aws_iam_policy_document.onboarding_lambdas_write_credentials
       ]
     }
   }
