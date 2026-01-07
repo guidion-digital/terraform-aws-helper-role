@@ -23,9 +23,21 @@ variable "attach_lambda_cloudwatch" {
 variable "assuming_principal" {
   type        = string
   description = "Principal"
+  default     = null
 
   validation {
     condition     = contains(["lambda.amazonaws.com", "rds.amazonaws.com"], var.assuming_principal)
     error_message = "Pricipal supports: lambda, rds."
+  }
+}
+
+variable "assuming_principals" {
+  type        = list(string)
+  description = "Principals"
+  default     = []
+
+  validation {
+    condition     = alltrue([for principal in var.assuming_principals : contains(["lambda.amazonaws.com", "rds.amazonaws.com"], principal)])
+    error_message = "Principals supports: lambda, rds."
   }
 }
