@@ -13,7 +13,7 @@ variable "source_policy_documents" {
       for doc in var.source_policy_documents :
       can(doc.Version) && can(doc.Statement)
     ])
-    error_message = "Each source policy document must be a valid IAM policy JSON with Version and Statement keys."
+    error_message = "Each source policy document must be a valid IAM policy JSON with Version and Statement keys. Got: ${jsonencode(var.source_policy_documents)}"
   }
 }
 

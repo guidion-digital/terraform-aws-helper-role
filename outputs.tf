@@ -13,3 +13,7 @@ output "role_arn" {
 output "role_name" {
   value = aws_iam_role.role.name
 }
+
+output "debug_policy_docs" {
+  value = var.source_policy_documents
+}
