@@ -1,9 +1,5 @@
-output "aws_iam_policy" {
-  value = aws_iam_policy.policy
-}
-
-output "aws_iam_policy_document" {
-  value = data.aws_iam_policy_document.policy_document
+output "aws_iam_policies" {
+  value = aws_iam_policy.policies
 }
 
 output "aws_iam_role" {
