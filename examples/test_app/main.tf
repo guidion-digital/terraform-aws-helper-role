@@ -11,7 +11,7 @@ module "roles_with_principals" {
 
   for_each = {
     "full_access_credentials" = {
-      source_policy_documents = [
+      policy_documents = [
         data.aws_iam_policy_document.onboarding_lambdas_read_credentials,
         data.aws_iam_policy_document.onboarding_lambdas_write_credentials
       ]
@@ -21,7 +21,7 @@ module "roles_with_principals" {
   name                     = replace(each.key, "_", "-")
   app_name                 = "demoapp"
   assuming_principals      = ["lambda.amazonaws.com", "rds.amazonaws.com"]
-  source_policy_documents  = each.value.source_policy_documents
+  policy_documents         = each.value.policy_documents
   attach_lambda_cloudwatch = true
 }
 

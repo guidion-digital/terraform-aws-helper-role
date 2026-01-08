@@ -3,14 +3,14 @@ variable "name" {
   description = "Name of the role"
 }
 
-variable "source_policy_documents" {
+variable "policy_documents" {
   type        = list(any)
   description = "List of IAM policy documents (use aws_iam_policy_document data source)"
   default     = []
 
   validation {
     condition = alltrue([
-      for doc in var.source_policy_documents :
+      for doc in var.policy_documents :
       can(jsondecode(doc.json).Version) && can(jsondecode(doc.json).Statement)
     ])
     error_message = "Each source policy document must be a valid IAM policy JSON with Version and Statement keys."
