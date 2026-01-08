@@ -6,6 +6,6 @@ Creates a role and attaches policies to it.
 
 # Usage
 
-Creates a role with named after `var.name` with `var.source_policy_documents` attached.
+Creates a role with named after `var.name` with `var.policy_documents` attached.
 
 See [examples folder](./examples).

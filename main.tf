@@ -22,7 +22,7 @@ locals {
 
   all_policy_documents = merge(
     var.attach_lambda_cloudwatch ? { "cloudwatch" = data.aws_iam_policy_document.cloudwatch_policy_document } : {},
-    { for idx, doc in var.source_policy_documents : "policy-${idx}" => doc }
+    { for idx, doc in var.policy_documents : "policy-${idx}" => doc }
   )
 }
 
