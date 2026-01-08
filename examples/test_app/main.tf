@@ -25,11 +25,6 @@ module "roles_with_principals" {
   attach_lambda_cloudwatch = true
 }
 
-# Example output
-output "created_role_with_principal" {
-  value = module.roles_with_principal["full_access_credentials"].aws_iam_role
-}
-
 output "created_role_with_principals" {
   value = module.roles_with_principals["full_access_credentials"].aws_iam_role
 }

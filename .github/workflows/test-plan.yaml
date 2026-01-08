@@ -2,7 +2,7 @@ name: Tests plans
 
 on:
   pull_request:
-    branches: [acc]
+    branches: [acc, initial-implementation]
     types: [opened, edited, synchronize]
 
 jobs:
