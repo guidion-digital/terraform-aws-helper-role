@@ -6,25 +6,6 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-module "roles_with_principal" {
-  source = "../../"
-
-  for_each = {
-    "full_access_credentials" = {
-      source_policy_documents = [
-        data.aws_iam_policy_document.onboarding_lambdas_read_credentials,
-        data.aws_iam_policy_document.onboarding_lambdas_write_credentials
-      ]
-    }
-  }
-
-  name                     = replace(each.key, "_", "-")
-  app_name                 = "demoapp"
-  assuming_principal       = "lambda.amazonaws.com"
-  source_policy_documents  = each.value.source_policy_documents
-  attach_lambda_cloudwatch = true
-}
-
 module "roles_with_principals" {
   source = "../../"
 
