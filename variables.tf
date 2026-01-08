@@ -35,6 +35,6 @@ variable "assuming_principals" {
 
   validation {
     condition     = alltrue([for principal in var.assuming_principals : contains(["lambda.amazonaws.com", "rds.amazonaws.com"], principal)])
-    error_message = "Principals supports: lambda, rds."
+    error_message = "Principals supports: lambda.amazonaws.com, rds.amazonaws.com"
   }
 }
