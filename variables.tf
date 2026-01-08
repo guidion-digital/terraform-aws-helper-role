@@ -4,9 +4,17 @@ variable "name" {
 }
 
 variable "source_policy_documents" {
-  type        = list(string)
-  description = "Source policy documents"
+  type        = list(any)
+  description = "List of IAM policy documents (use aws_iam_policy_document data source)"
   default     = []
+
+  validation {
+    condition = alltrue([
+      for doc in var.source_policy_documents :
+      can(jsondecode(doc.json).Version) && can(jsondecode(doc.json).Statement)
+    ])
+    error_message = "Each source policy document must be a valid IAM policy JSON with Version and Statement keys."
+  }
 }
 
 variable "app_name" {
@@ -20,12 +28,13 @@ variable "attach_lambda_cloudwatch" {
   default     = false
 }
 
-variable "assuming_principal" {
-  type        = string
-  description = "Principal"
+variable "assuming_principals" {
+  type        = list(string)
+  description = "Principals"
+  default     = []
 
   validation {
-    condition     = contains(["lambda.amazonaws.com", "rds.amazonaws.com"], var.assuming_principal)
-    error_message = "Pricipal supports: lambda, rds."
+    condition     = alltrue([for principal in var.assuming_principals : contains(["lambda.amazonaws.com", "rds.amazonaws.com"], principal)])
+    error_message = "Principals supports: lambda, rds."
   }
 }
