@@ -1,6 +1,10 @@
 variable "name" {
   type        = string
   description = "Name of the role"
+  validation {
+    condition     = length(trimspace(var.name)) > 0
+    error_message = "Role name must not be empty."
+  }
 }
 
 variable "policy_documents" {
@@ -20,6 +24,17 @@ variable "policy_documents" {
 variable "app_name" {
   type        = string
   description = "Application name"
+
+  validation {
+    condition     = length(trimspace(var.app_name)) > 0
+    error_message = "Application name must not be empty."
+  }
+}
+
+variable "role_prefix" {
+  type        = string
+  description = "Role prefix. By default, the application name is used."
+  default     = ""
 }
 
 variable "attach_lambda_cloudwatch" {
