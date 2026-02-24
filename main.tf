@@ -24,6 +24,8 @@ locals {
     var.attach_lambda_cloudwatch ? { "cloudwatch" = data.aws_iam_policy_document.cloudwatch_policy_document } : {},
     { for idx, doc in var.policy_documents : "policy-${idx}" => doc }
   )
+
+  role_prefix = var.role_prefix != "" ? var.role_prefix : var.app_name
 }
 
 data "aws_iam_policy_document" "cloudwatch_policy_document" {
@@ -37,13 +39,13 @@ data "aws_iam_policy_document" "cloudwatch_policy_document" {
 resource "aws_iam_policy" "policies" {
   for_each = local.all_policy_documents
 
-  name   = "${var.app_name}-${var.name}-${each.key}"
+  name   = "${local.role_prefix}-${var.name}-${each.key}"
   path   = "/applications/"
   policy = each.value.json
 }
 
 resource "aws_iam_role" "role" {
-  name = "${var.app_name}-${var.name}"
+  name = "${local.role_prefix}-${var.name}"
 
   assume_role_policy = local.basic_sts_assume_role_policy
 }
