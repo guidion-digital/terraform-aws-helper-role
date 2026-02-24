@@ -17,7 +17,7 @@ locals {
     "logs:PutLogEvents"
   ]
   basic_cloudwatch_resources = [
-    "arn:aws:logs:${data.aws_region.current.name}:${data.aws_caller_identity.current.id}:log-group:/aws/lambda/${var.app_name}-*"
+    "arn:aws:logs:${data.aws_region.current.region}:${data.aws_caller_identity.current.id}:log-group:/aws/lambda/${var.app_name}-*"
   ]
 
   all_policy_documents = merge(
