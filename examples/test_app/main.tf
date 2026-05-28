@@ -21,7 +21,7 @@ module "roles_with_principals" {
   name                     = replace(each.key, "_", "-")
   app_name                 = "demoapp"
   role_prefix              = "role-prefix"
-  assuming_principals      = ["lambda.amazonaws.com", "rds.amazonaws.com"]
+  assuming_principals      = ["lambda.amazonaws.com", "rds.amazonaws.com", "scheduler.amazonaws.com"]
   policy_documents         = each.value.policy_documents
   attach_lambda_cloudwatch = true
 }
